@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SignUp() {
   const [users, setUser] = useState([]);
@@ -9,8 +11,11 @@ function SignUp() {
 
   const handleclic = (e) => {
     e.preventDefault();
+
     if (!name || !email || !password) {
-      window.alert("empty fields");
+      toast.error("empty field.", {
+        position: "top-center",
+      });
       return;
     }
     let newUser = {
@@ -24,14 +29,12 @@ function SignUp() {
     setUser(User);
     localStorage.setItem("user", JSON.stringify(User));
   };
-   
-  const navigate= useNavigate();
 
-  const handleSignIn=()=>{
-    
-    navigate("/SignIn")
+  const navigate = useNavigate();
 
-  }
+  const handleSignIn = () => {
+    navigate("/SignIn");
+  };
 
   // to keep the localstorage
   useEffect(() => {
@@ -42,11 +45,11 @@ function SignUp() {
   }, []);
 
   return (
-    <div className="flex flex-col  justify-center items-center  border-2 p-6 ">
-      <div className="flex flex-col  justify-center items-center m-[100px] sm:w-full md:w-2/3 lg:w-1/2 xl:w-full border-2  px-6 py-4 ">
+    <div className="flex flex-col  justify-center items-center   -2 p-6 ">
+      <div className="flex flex-col  justify-center items-center m-[100px]  sm:w-full md:w-2/3 lg:w-1/2 xl:w-full   px-6 py-4 ">
         <h1 className="font-bold text-4xl text-white">Sign-Up </h1>
 
-        <div className="flex flex-col justify-center  p-3  sm:w-full md:w-1/3 lg:w-1/2 xl:w-1/3 m-4  border">
+        <div className="flex flex-col justify-center  p-10  sm:w-full md:w-1/full lg:w-1/3 xl:w-1/3 m-4  border">
           <label htmlFor="name" className="text-white font-semibold">
             Name
           </label>
@@ -86,7 +89,7 @@ function SignUp() {
           </button>
 
           <button
-            className=" text-white bg-green-800   flex items-center  rounded-lg   font-semibold border w-fit px-3 py-2 mt-2 mx-auto"
+            className=" text-white bg-green-800   flex items-center rounded-lg   font-semibold border w-fit px-3 py-2 mt-2 mx-auto"
             type="button"
             onClick={handleSignIn}
           >
@@ -94,6 +97,7 @@ function SignUp() {
           </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
