@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignIn from "./Components/SignIn";
-import SignUp from "./Components/Signup";    
+import SignUp from "./Components/Signup";  
+import Home from "./Components/Home"; 
+import ProtectedRoute from './Components/ProtectedRoute';
 
 export default function App() {
   return (
@@ -10,6 +12,12 @@ export default function App() {
         <Routes>
           <Route path="/" element={<SignUp/>} />  
           <Route path="/SignIn" element={<SignIn/>} />  
+          <Route path="/Home" element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          } />  
+
         </Routes>
       </Router>
     </div>
