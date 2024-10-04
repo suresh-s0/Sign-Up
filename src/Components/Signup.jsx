@@ -8,6 +8,8 @@ function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
+  const navigate = useNavigate();
+
 
   const handleclic = (e) => {
     e.preventDefault();
@@ -28,9 +30,11 @@ function SignUp() {
 
     setUser(User);
     localStorage.setItem("user", JSON.stringify(User));
+    localStorage.setItem("isAuthenticated", "true");
+    navigate("/Home");
+
   };
 
-  const navigate = useNavigate();
 
   const handleSignIn = () => {
     navigate("/SignIn");
