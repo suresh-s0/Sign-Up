@@ -1,9 +1,9 @@
 package models
 
 type User struct {
-	Id       int    `json:"id" gorm:"coloum:id"`
-	Name     string `json:"name" gorm:"coloum:name"`
-	Email    string `json:"email" gorm:"coloum:email"`
-	Password string `json:"password" gorm:"coloum:password"`
-	IsAdmin  bool   ` gorm:"coloum:isadmin"`
+	Id       int    `json:"id" gorm:"primaryKey"`
+	Name     string `json:"name" gorm:"column:name"`
+	Email    string `json:"email" gorm:"column:email"`
+	Password string `json:"password" gorm:"column:password"`
+	IsAdmin  bool   `json:"isadmin" gorm:"column:is_admin;default:false"`
 }
