@@ -34,3 +34,25 @@ func (h *UserHandler) CreateUser(c *gin.Context) {
 	response.Success(c, "User created successfully", user)
 
 }
+
+func (h *UserHandler) CheckEmailPassword(c *gin.Context) {
+	var requestBody struct {
+		Email    string `json:"email"`
+		Password string `json:"password"`
+	}
+
+	// Bind JSON request to the struct
+	if err := c.ShouldBindJSON(&requestBody); err != nil {
+		response.BadRequestError(c, "Invalid request")
+		return
+	}
+
+	// Call the CheckPassword service
+	user, err := h.service.CheckPassword(requestBody.Email, requestBody.Password)
+	if err != nil {
+		response.BadRequestError(c, err.Error())
+		return
+	}
+
+	response.Success(c, "User logged in successfully", user)
+}
