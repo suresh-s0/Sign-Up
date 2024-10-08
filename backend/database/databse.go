@@ -12,9 +12,12 @@ func Init() (*gorm.DB, error) {
 	dsn := "User.db"
 
 	db, err := gorm.Open(sqlite.Open(dsn), &gorm.Config{})
-	db.AutoMigrate(&models.User{})
 
 	if err != nil {
+		return nil, err
+	}
+
+	if err := db.AutoMigrate(&models.User{}); err != nil {
 		return nil, err
 	}
 	if err := InitdefaultUser(db); err != nil {
