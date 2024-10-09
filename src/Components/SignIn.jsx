@@ -9,18 +9,38 @@ function SignIn() {
   const navigate = useNavigate();
   const users = JSON.parse(localStorage.getItem("user")) || [];
 
-  const handleclic = (e) => {
+  const handleclic = async (e) => {
     e.preventDefault();
+    let newUSer = {
+      email,
+      password,
+    };
+    try {
+      let response = await fetch("http://localhost:8080/api/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUSer),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        toast.success("Login successful!", {
+          position: "top-center",
+        });
 
-    const isUserFound = users.some(
-      (user) => email === user.email && password === user.password
-    );
-
-    if (isUserFound) {
-      localStorage.setItem("isAuthenticated", "true");
-      navigate("/Home");
-    } else {
-      toast.error("email or password does not match", {
+        localStorage.setItem("isAuthenticated", "true");
+        navigate("/Home");
+      } else {
+        // Failed login
+        toast.error("Email or password does not match", {
+          position: "top-center",
+        });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      console.error("Error:", error);
+      toast.error(`Error: ${error.message}`, {
         position: "top-center",
       });
     }

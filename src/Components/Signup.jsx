@@ -49,59 +49,12 @@ function SignUp() {
       console.error("Error:", error);
       console.error("Error:", error);
       toast.error(`Error: ${error.message}`, {
-        position:"top-center",
+        position: "top-center",
       });
     }
   };
 
-  //======================================================================
-
-  // =======================================================================
-
-  // const handleclic = async (e) => {
-  //   e.preventDefault();
-  //   if (!name || !email || !password) {
-  //     toast.error("empty field.", {
-  //       position: "top-center",
-  //     });
-  //     return;
-  //   }
-  //   let newUser = {
-  //     name,
-  //     email,
-  //     password,
-  //   };
-
-  //   // let User = [...users, newUser];
-
-  //   // setUser(User);
-
-  //   try {
-  //     const response = await fetch('http://localhost:8080/api/signup', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(newUser),
-  //     });
-  //     if (!response.ok) {
-  //       const errorData = await response.json();
-  //       toast.error(errorData.message || "An error occurred");
-  //       return;
-  //     }
-  //     const data = await response.json();
-  //     console.log(data);
-  //     let updatedUsers = [...users, newUser];
-  //     setUser(updatedUsers);
-  //     localStorage.setItem("user", JSON.stringify(updatedUsers));
-  //     localStorage.setItem("isAuthenticated", "true");
-  //   navigate("/Home");
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-
-  // };
-
+  
   const handleSignIn = () => {
     navigate("/SignIn");
   };
