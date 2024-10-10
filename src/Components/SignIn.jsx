@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,7 +7,7 @@ function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
   const navigate = useNavigate();
-  const users = JSON.parse(localStorage.getItem("user")) || [];
+  // const users = JSON.parse(localStorage.getItem("user")) || [];
 
   const handleclic = async (e) => {
     e.preventDefault();
@@ -25,6 +25,7 @@ function SignIn() {
       });
       if (response.ok) {
         const data = await response.json();
+        console.log(data)
         toast.success("Login successful!", {
           position: "top-center",
         });
