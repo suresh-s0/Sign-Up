@@ -40,11 +40,12 @@ function SignUp() {
       }
       const data = await response.json();
       console.log(data);
-      let updatedUser = [newUser, ...users];
+      let updatedUser = [...users, newUser];
       setUser(updatedUser);
       localStorage.setItem("users", JSON.stringify(updatedUser));
       localStorage.setItem("isAuthenticated", "true");
       navigate("/signin");
+
     } catch (error) {
       console.error("Error:", error);
       console.error("Error:", error);
@@ -54,14 +55,14 @@ function SignUp() {
     }
   };
 
-  
+
   const handleSignIn = () => {
     navigate("/SignIn");
   };
 
   // to keep the localstorage
   useEffect(() => {
-    let savedUsers = JSON.parse(localStorage.getItem("user"));
+    let savedUsers = JSON.parse(localStorage.getItem("users"));
     if (savedUsers) {
       setUser(savedUsers);
     }
