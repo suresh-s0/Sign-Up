@@ -44,7 +44,7 @@ function SignUp() {
       setUser(updatedUser);
       localStorage.setItem("users", JSON.stringify(updatedUser));
       localStorage.setItem("isAuthenticated", "true");
-      navigate("/Home");
+      navigate("/signin");
     } catch (error) {
       console.error("Error:", error);
       console.error("Error:", error);
