@@ -26,12 +26,13 @@ func (h *UserHandler) CreateUser(c *gin.Context) {
 		return
 	}
 
-	if err := h.service.CreateUser(user); err != nil {
+	token, err := h.service.CreateUser(user)
+	if err != nil {
 		response.BadRequestError(c, err.Error())
 		return
 
 	}
-	response.Success(c, "User created successfully", user)
+	response.Success(c, "User created successfully", token)
 
 }
 

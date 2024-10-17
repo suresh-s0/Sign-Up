@@ -40,11 +40,30 @@ function SignUp() {
       }
       const data = await response.json();
       console.log(data);
-      let updatedUser = [...users, newUser];
+      const token = data.data;  
+      console.log(token);
+
+
+      if (token) {
+        let updatedUser = [...users, newUser];
       setUser(updatedUser);
       localStorage.setItem("users", JSON.stringify(updatedUser));
-      localStorage.setItem("isAuthenticated", "true");
-      navigate("/signin");
+     
+        localStorage.setItem("jwtToken", token);
+
+        localStorage.setItem("isAuthenticated", "true");
+  
+        toast.success("Signup successful!", {
+          position: "top-center",
+        });
+  
+        navigate("/signin");  // Navigate to signin page after successful signup
+      }
+
+
+
+
+
 
     } catch (error) {
       console.error("Error:", error);
@@ -70,7 +89,7 @@ function SignUp() {
 
   return (
     <div className="flex flex-col  justify-center items-center   -2 p-6 ">
-      <div className="flex flex-col  justify-center items-center m-[100px]  sm:w-full md:w-2/3 lg:w-1/2 xl:w-full   px-6 py-4 ">
+      <div className="flex flex-col  justify-center items-center m-[100px]  sm:w-full md:w-2/3 lg:w-full xl:w-full   px-6 py-4 ">
         <h1 className="font-bold text-4xl text-white">Sign-Up </h1>
 
         <div className="flex flex-col justify-center  p-10  sm:w-full md:w-1/full lg:w-1/3 xl:w-1/3 m-4  border">
@@ -81,6 +100,7 @@ function SignUp() {
             className="border  rounded rounded:lg p-2 mb-2"
             type="text"
             placeholder="Enter Your name "
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
 
@@ -91,6 +111,7 @@ function SignUp() {
             className="border  rounded rounded:md p-2 mb-2"
             type="email"
             placeholder="Enter Your Email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
@@ -101,6 +122,7 @@ function SignUp() {
             className="border  rounded-md p-2 mb-2"
             type="password"
             placeholder="Enter Your password"
+            value={password}
             onChange={(e) => setPass(e.target.value)}
           />
 
