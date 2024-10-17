@@ -28,12 +28,33 @@ func (r *UserRepository) CreateUser(user models.User) error {
 
 }
 
-func (r *UserRepository) GetUserByEmail(email string) (models.User, error) {
+func (r *UserRepository) GetUserByName(name string) (*models.User, error) {
 	var user models.User
+
+	err := r.db.Raw("SELECT id,name, email, password, is_admin FROM users WHERE name = ?", name).Scan(&user).Error
+	if err != nil {
+		return &models.User{}, err
+	}
+	return &user, nil
+}
+
+func (r *UserRepository) GetUserByEmail(email string) (*models.User, error) {
+	var user *models.User
 
 	err := r.db.Raw("SELECT id,name, email, password, is_admin FROM users WHERE email = ?", email).Scan(&user).Error
 	if err != nil {
-		return models.User{}, err
+		return &models.User{}, err
 	}
 	return user, nil
+}
+
+func (r *UserRepository) GetUserById(id uint) (*models.User, error) {
+	var user *models.User
+
+	err := r.db.Raw("SELECT id,name, email, password, is_admin FROM users WHERE id = ?", id).Scan(&user).Error
+	if err != nil {
+		return &models.User{}, err
+	}
+	return user, nil
+
 }

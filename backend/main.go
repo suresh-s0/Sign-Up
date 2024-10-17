@@ -24,13 +24,7 @@ func main() {
 	defer sqlDB.Close()
 
 	router := gin.Default()
-
-	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:5173"},  // Allow your frontend URL
-		AllowMethods:     []string{"GET", "POST", "OPTIONS"}, // Allow specific methods
-		AllowHeaders:     []string{"Origin", "Content-Type"}, // Allow specific headers
-		AllowCredentials: true,                               // Allow cookies
-	}))
+	setupCors(router)
 	setupRoutes(router, db)
 	router.Run(":8080")
 
@@ -38,4 +32,13 @@ func main() {
 
 func setupRoutes(router *gin.Engine, db *gorm.DB) {
 	routes.SetupRoutes(router, db)
+}
+
+func setupCors(router *gin.Engine) {
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowOrigins = []string{"*"}
+	corsConfig.AllowMethods = []string{"GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"}
+	corsConfig.AllowHeaders = []string{"Origin", "Content-Type", "Authorization"}
+
+	router.Use(cors.New(corsConfig))
 }
