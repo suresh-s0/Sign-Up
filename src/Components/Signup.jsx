@@ -40,11 +40,30 @@ function SignUp() {
       }
       const data = await response.json();
       console.log(data);
-      let updatedUser = [...users, newUser];
+      const token = data.data;  
+      console.log(token);
+
+
+      if (token) {
+        let updatedUser = [...users, newUser];
       setUser(updatedUser);
       localStorage.setItem("users", JSON.stringify(updatedUser));
-      localStorage.setItem("isAuthenticated", "true");
-      navigate("/signin");
+     
+        localStorage.setItem("jwtToken", token);
+
+        localStorage.setItem("isAuthenticated", "true");
+  
+        toast.success("Signup successful!", {
+          position: "top-center",
+        });
+  
+        navigate("/signin");  // Navigate to signin page after successful signup
+      }
+
+
+
+
+
 
     } catch (error) {
       console.error("Error:", error);
@@ -81,6 +100,7 @@ function SignUp() {
             className="border  rounded rounded:lg p-2 mb-2"
             type="text"
             placeholder="Enter Your name "
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
 
@@ -91,6 +111,7 @@ function SignUp() {
             className="border  rounded rounded:md p-2 mb-2"
             type="email"
             placeholder="Enter Your Email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
@@ -101,6 +122,7 @@ function SignUp() {
             className="border  rounded-md p-2 mb-2"
             type="password"
             placeholder="Enter Your password"
+            value={password}
             onChange={(e) => setPass(e.target.value)}
           />
 

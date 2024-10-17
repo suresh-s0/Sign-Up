@@ -26,10 +26,10 @@ func main() {
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:5173"},  // Allow your frontend URL
-		AllowMethods:     []string{"GET", "POST", "OPTIONS"}, // Allow specific methods
-		AllowHeaders:     []string{"Origin", "Content-Type"}, // Allow specific headers
-		AllowCredentials: true,                               // Allow cookies
+		AllowOrigins:     []string{"http://localhost:5173"},                   // Allow your frontend URL
+		AllowMethods:     []string{"GET", "POST", "OPTIONS"},                  // Allow specific methods
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"}, // Allow specific headers
+		AllowCredentials: true,                                                // Allow cookies
 	}))
 	setupRoutes(router, db)
 	router.Run(":8080")

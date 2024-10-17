@@ -15,26 +15,41 @@ function SignIn() {
       email,
       password,
     };
+
+    const token = localStorage.getItem("jwtToken");
     try {
       let response = await fetch("http://localhost:8080/api/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+            "Authorization": token ? `Bearer ${token}` : ""
         },
         body: JSON.stringify(newUSer),
       });
       if (response.ok) {
         const data = await response.json();
         console.log(data)
-        toast.success("Login successful!", {
-          position: "top-center",
-        });
 
-        localStorage.setItem("isAuthenticated", "true");
+        const token= data.token
+
+        if (token) {
+          // Save token in localStorage
+          localStorage.setItem("jwtToken", token);
+          localStorage.setItem("isAuthenticated", "true");
+
+          toast.success("Login successful!", {
+            position: "top-center",
+          });
+        }
+
+        
+      
+
         navigate("/Home");
       } else {
         // Failed login
-        toast.error("Email or password does not match", {
+        const errorData = await response.json(); 
+        toast.error(errorData.message || "Email or password does not match", {
           position: "top-center",
         });
       }
@@ -60,6 +75,7 @@ function SignIn() {
             className="border  rounded rounded:md p-2 mb-2"
             type="email"
             placeholder="Enter Your Email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
@@ -70,6 +86,7 @@ function SignIn() {
             className="border  rounded-md p-2 mb-2"
             type="password"
             placeholder="Enter Your password"
+            value={password}
             onChange={(e) => setPass(e.target.value)}
           />
 
