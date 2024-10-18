@@ -12,6 +12,6 @@ func UserRoutes(r *gin.RouterGroup, repo domain.UserRepository, auth middleware.
 	handlers := handlers.NewHandler(ser)
 
 	r.POST("/signup", handlers.CreateUser)
-	r.POST("/signin", auth.AuthMiddleware(), handlers.CheckEmailPassword)
+	r.POST("/signin", handlers.CheckEmailPassword)
 
 }

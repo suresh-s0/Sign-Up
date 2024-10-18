@@ -7,9 +7,10 @@ type UserRepository interface {
 	GetUserByEmail(email string) (*models.User, error)
 	GetUserById(id uint) (*models.User, error)
 	GetUserByName(name string) (*models.User, error)
+	UpdateToken(email string, token string) error
 }
 
 type UserService interface {
-	CreateUser(user models.User) (string, error)
+	CreateUser(user models.User) error
 	CheckPassword(email string, password string) (*models.User, error)
 }

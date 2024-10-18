@@ -58,3 +58,12 @@ func (r *UserRepository) GetUserById(id uint) (*models.User, error) {
 	return user, nil
 
 }
+
+func (r *UserRepository) UpdateToken(email string, token string) error {
+
+	err := r.db.Exec("UPDATE  users SET token=?  WHERE email =?", token, email).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
