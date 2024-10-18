@@ -6,4 +6,5 @@ type User struct {
 	Email    string `json:"email" gorm:"column:email"`
 	Password string `json:"password" gorm:"column:password"`
 	IsAdmin  bool   `json:"isadmin" gorm:"column:is_admin;default:false"`
+	Token    string `json:"token" gorm:"column:token"`
 }
