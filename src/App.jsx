@@ -7,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-gray-900 font-monospace">
         <ToastContainer />
       <Router>
     
