@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,jsx,css}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        monospace: ['"Courier New"', 'Courier', 'monospace'],  // Proper font family array
+      },
+    },
   },
   plugins: [],
 }
