@@ -40,7 +40,8 @@ function SignIn() {
             position: "top-center",
           });
         }
-        navigate("/Home");
+
+        window.location.href = "https://todo-list-05s.netlify.app/";;
       } else {
         // Failed login
         const errorData = await response.json(); 
