@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,7 +21,7 @@ function SignIn() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-            "Authorization": token ? `Bearer ${token}` : ""
+          "Authorization": token ? `Bearer ${token}` : ""
         },
         body: JSON.stringify(newUSer),
       });
@@ -29,7 +29,7 @@ function SignIn() {
         const data = await response.json();
         console.log(data)
 
-        const token= data.token
+        const token = data.token
 
         if (token) {
           // Save token in localStorage
@@ -43,21 +43,18 @@ function SignIn() {
 
         window.location.href = "https://todo-list-05s.netlify.app/";;
       } else {
-        // Failed login
-        const errorData = await response.json(); 
+        const errorData = await response.json();
         toast.error(errorData.message || "Email or password does not match", {
           position: "top-center",
         });
       }
     } catch (error) {
-      console.error("Error:", error);
-      console.error("Error:", error);
       toast.error(`Error: ${error.message}`, {
         position: "top-center",
       });
     }
   };
-  
+
 
   return (
 

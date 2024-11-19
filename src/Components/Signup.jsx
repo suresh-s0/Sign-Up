@@ -40,33 +40,27 @@ function SignUp() {
       }
       const data = await response.json();
       console.log(data);
-      const token = data.data;  
+      const token = data.data;
       console.log(token);
 
 
       if (token) {
         let updatedUser = [...users, newUser];
-      setUser(updatedUser);
-      localStorage.setItem("users", JSON.stringify(updatedUser));
-     
+        setUser(updatedUser);
+        localStorage.setItem("users", JSON.stringify(updatedUser));
+
         localStorage.setItem("jwtToken", token);
 
         localStorage.setItem("isAuthenticated", "true");
-  
+
         toast.success("Signup successful!", {
           position: "top-center",
         });
-  
+
         navigate("/signin");  // Navigate to signin page after successful signup
       }
 
-
-
-
-
-
     } catch (error) {
-      console.error("Error:", error);
       console.error("Error:", error);
       toast.error(`Error: ${error.message}`, {
         position: "top-center",
@@ -143,7 +137,7 @@ function SignUp() {
           </button>
         </div>
       </div>
-  
+
     </div>
   );
 }
