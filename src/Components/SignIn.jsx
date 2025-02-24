@@ -17,11 +17,19 @@ function SignIn() {
 
     const token = localStorage.getItem("jwtToken");
     try {
-      let response = await fetch("http://localhost:8080/api/signin", {
+      // go
+      // let response = await fetch("http://localhost:8080/api/signin", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     "Authorization": token ? `Bearer ${token}` : ""
+      //   },
+      // java
+      let response = await fetch("http://localhost:8080/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": token ? `Bearer ${token}` : ""
+          // "Authorization": token ? `Bearer ${token}` : ""
         },
         body: JSON.stringify(newUSer),
       });
